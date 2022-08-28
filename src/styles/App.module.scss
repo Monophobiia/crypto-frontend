@@ -1,0 +1,17 @@
+@import "src/variables";
+
+.app {
+    height: 100%;
+    vertical-align: top;
+    background-color: $main-background;
+
+    &__coin-list {
+        width: 25%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    &__single-coin {
+        height: 95vh;
+    }
+}
