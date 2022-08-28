@@ -1,0 +1,1 @@
+A small React+TS project based on Coingecko API.
