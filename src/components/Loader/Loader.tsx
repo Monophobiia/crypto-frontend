@@ -1,5 +1,6 @@
 import React from "react";
-import classnames from "classnames";
+import cn from "classnames";
+import styles from "./Loader.module.scss";
 
 /** Possible Loader sizes */
 export enum LoaderSize {
@@ -32,8 +33,10 @@ const Loader: React.FC<LoaderProps> = ({
   size = LoaderSize.m,
   className,
 }: LoaderProps) => {
-  if (loading)
-    return <div className={classnames(className, "loader_size-" + size)}></div>;
+  if (!loading) return null;
+  return (
+    <div className={cn(className, `loader_size-${size}`, styles["loader"])} />
+  );
 };
 
 export default Loader;

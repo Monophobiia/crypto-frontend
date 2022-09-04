@@ -1,44 +1,23 @@
 import React from "react";
-import Coin from "@components/Coin";
-import Coins from "@components/Coins";
-import styles from "@styles/App.module.scss";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import routes from "@config/routes";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useRoutes,
+} from "react-router-dom";
+import styles from "./App.module.scss";
 
 const App = () => {
+  const RouteProvider = () => {
+    return useRoutes(routes);
+  };
+
   return (
     <div className={`${styles.app}`}>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className={styles["app__coin-list"]}>
-                <Coins />
-              </div>
-            }
-          />
-          <Route path="/">
-            <Route
-              path=":tab"
-              element={
-                <div className={styles["app__coin-list"]}>
-                  <Coins />
-                </div>
-              }
-            />
-          </Route>
-          <Route path="/coin">
-            <Route
-              path=":id"
-              element={
-                <div className={styles["app__single-coin"]}>
-                  <Coin />
-                </div>
-              }
-            />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <RouteProvider />
       </BrowserRouter>
     </div>
   );

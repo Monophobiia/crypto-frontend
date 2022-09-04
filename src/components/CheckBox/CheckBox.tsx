@@ -15,18 +15,14 @@ export const CheckBox: React.FC<CheckBoxProps> = ({
   onChange,
   ...rest
 }: CheckBoxProps) => {
-  const [isChecked, setChecked] = useState(checked);
-  const toggle = (previous: boolean) => !previous;
-
   function handleChange() {
-    onChange(!isChecked);
+    onChange(!checked);
   }
 
   return (
     <input
       type="checkbox"
-      checked={isChecked}
-      onClick={() => setChecked(toggle)}
+      checked={checked}
       onChange={handleChange}
       {...rest}
     />

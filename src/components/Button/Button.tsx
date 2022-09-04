@@ -1,6 +1,6 @@
 import React from "react";
-import classnames from "classnames";
-import { Loader } from "../Loader/Loader";
+import { Loader } from "@components/Loader";
+import cn from "classnames";
 
 /** Possible button colors */
 export enum ButtonColor {
@@ -33,16 +33,16 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={classnames(
+      className={cn(
         className,
         "button",
-        "button_color-" + color,
+        `button_color-${color}`,
         disabled || loading ? "button_disabled" : ""
       )}
       disabled={disabled || loading}
       {...rest}
     >
-      {children} {loading ? <Loader /> : ""}
+      {children} {loading ? <Loader /> : null}
     </button>
   );
 };

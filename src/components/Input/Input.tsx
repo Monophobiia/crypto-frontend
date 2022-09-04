@@ -1,5 +1,5 @@
 import React from "react";
-import classnames from "classnames";
+import cn from "classnames";
 
 /** Props for Input component */
 export type InputProps = Omit<
@@ -16,22 +16,18 @@ export const Input: React.FC<InputProps> = ({
   value = "",
   className,
   onChange,
+  disabled,
   ...rest
 }: InputProps) => {
   function handleChange(event) {
-    if (typeof onChange === "function") {
-      onChange(event.target.value);
-    }
+    onChange(event.target.value);
   }
 
   return (
     <input
       value={value}
       type="text"
-      className={classnames(
-        { ...rest }.disabled ? "input_disabled" : "",
-        className
-      )}
+      className={cn(disabled ? "input_disabled" : "", className)}
       onChange={handleChange}
       {...rest}
     ></input>

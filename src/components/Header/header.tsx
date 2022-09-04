@@ -1,8 +1,8 @@
 import React from "react";
-import { MultiDropdown, Option } from "@components/MultiDropdown/MultiDropdown";
-import styles from "@styles/Header.module.scss";
-import classNames from "classnames";
+import MultiDropdown from "@components/MultiDropdown";
+import cn from "classnames";
 import { Link } from "react-router-dom";
+import styles from "./Header.module.scss";
 
 type HeaderProps = {
   /* Same as in MultiDropdown */
@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   <header className={styles.header}>
     <div className={styles.header__content}>
       <h1 className={styles.header__h1}>Coins</h1>
-      <span className={styles["header__filter-currency"]}>
+      <span className={styles["header__content__filter-currency"]}>
         <MultiDropdown
           value={dropdownValue}
           options={dropdownOptions}
@@ -37,9 +37,9 @@ const Header: React.FC<HeaderProps> = ({
       <span className={styles["header__links-all"]}>
         <Link
           to="/"
-          className={classNames(
+          className={cn(
             styles.header__link,
-            currentTab ? "" : styles.selected
+            currentTab || styles.header__selected
           )}
         >
           All
@@ -48,9 +48,9 @@ const Header: React.FC<HeaderProps> = ({
       <span className={styles["header__links-gainer"]}>
         <Link
           to="/gainer"
-          className={classNames(
+          className={cn(
             styles.header__link,
-            currentTab === "gainer" ? styles.selected : ""
+            currentTab === "gainer" ? styles.header__selected : ""
           )}
         >
           Gainer
@@ -59,20 +59,15 @@ const Header: React.FC<HeaderProps> = ({
       <span className={styles["header__links-loser"]}>
         <Link
           to="/loser"
-          className={classNames(
+          className={cn(
             styles.header__link,
-            currentTab === "loser" ? styles.selected : ""
+            currentTab === "loser" ? styles.header__selected : ""
           )}
         >
           Loser
         </Link>
       </span>
-      <span
-        className={classNames(
-          styles["header__links-fav"],
-          currentTab ? "" : ""
-        )}
-      >
+      <span className={cn(styles["header__links-fav"])}>
         <Link to="/favourites" className={styles.header__link}>
           Favourites
         </Link>

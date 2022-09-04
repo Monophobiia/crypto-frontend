@@ -2,7 +2,8 @@
 
 .coin {
     font-family: 'Circular Std', sans-serif;
-    width: 25%;
+    max-width: 500px;
+    flex: 1;
     height: auto;
     margin: 0 auto;
     font-size: 16px;
@@ -17,6 +18,7 @@
         width: 24px;
         top: 4px;
         margin-right: 5px;
+        margin-left: 10px;
     }
 
     &__name {
@@ -26,17 +28,17 @@
 
     &__symbol {
         color: $coin-symbol;
-        font-size: small;
-        padding-left: 1%;
+        font-size: 10px;
+        padding-left: 5px;
         font-size: 10px;
     }
 
     &__price {
-        width: 200%;
+        width: 100%;
 
         &__curr-price {
             font-size: 24px;
-            margin-right: 2%;
+            margin-right: 10px;
         }
 
         &__price-change-gain {
@@ -49,12 +51,11 @@
     }
 
     &__price__difference {
-        margin-right: 1%;
+        margin-right: 3px;
     }
 
     &__arrow-left {
         height: 15px;
         width: 15px;
-        padding-right: 5%;
     }
 }

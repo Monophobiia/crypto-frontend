@@ -2,14 +2,22 @@
 
 .header {
     height: auto;
-    width: 30%;
+    width: auto;
     font-size: 20px;
     padding-bottom: 5px;
 
     &__content {
-        width: 255%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
+
+        &__filter-currency {
+            font-style: normal;
+            font-weight: 450;
+            font-size: 12px;
+            line-height: 15px;
+            width: 25%;
+        }
     }
 
     &__h1 {
@@ -23,7 +31,6 @@
     }
 
     &__links {
-
         font-family: 'Circular Std', sans-serif;
         font-style: normal;
         font-weight: 450;
@@ -32,34 +39,25 @@
     }
 
     &__links-all {
-        margin-right: 10%;
-
+        margin-right: 3%;
     }
 
     &__links-gainer {
-        margin-right: 10%;
+        margin-right: 3%;
     }
 
     &__links-loser {
-        margin-right: 10%;
+        margin-right: 3%;
     }
 
     &__links-fav {
-        margin-right: 10%;
+        margin-right: 3%;
     }
 
-    &__filter-currency {
-        font-style: normal;
-        font-weight: 450;
-        font-size: 12px;
-        line-height: 15px;
-        display: flex;
+    &__selected {
+        text-decoration: none;
+        font-weight: bold;
+        color: $header-selected-link;
+        border-bottom: 2px solid $header-selected-link;
     }
-}
-
-.selected {
-    text-decoration: none;
-    font-weight: bold;
-    color: $header-selected-link;
-    border-bottom: 2px solid $header-selected-link;
 }

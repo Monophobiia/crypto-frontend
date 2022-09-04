@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader } from "../Loader/Loader";
+import { Loader } from "@components/Loader";
 
 /** Props for WithLoader component */
 export type WithLoaderProps = React.PropsWithChildren<{
@@ -13,7 +13,7 @@ export const WithLoader: React.FC<WithLoaderProps> = ({
   return (
     <div>
       {loading ? <Loader /> : null}
-      <div>{children}</div>
+      {children}
     </div>
   );
 };

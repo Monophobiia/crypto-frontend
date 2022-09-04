@@ -1,6 +1,8 @@
 import { useState } from "react";
 import React from "react";
-import styles from "@styles/MultiDropdown.module.scss";
+import arrowDown from "@assets/arrow_down.png";
+import arrowUp from "@assets/arrow_up.png";
+import styles from "./MultiDropdown.module.scss";
 
 /** Dropdown option */
 export type Option = {
@@ -24,7 +26,7 @@ type MultiDropdownProps = {
   pluralizeOptions: (value: Option[]) => string;
 };
 
-export const MultiDropdown: React.FC<MultiDropdownProps> = ({
+const MultiDropdown: React.FC<MultiDropdownProps> = ({
   options,
   value,
   onChange,
@@ -32,9 +34,9 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   pluralizeOptions,
 }: MultiDropdownProps) => {
   const [open, setOpen] = useState(false),
-    toggle = () => {
+    toggle = React.useCallback(() => {
       if (!disabled) setOpen(!open);
-    };
+    }, [open]);
 
   function handleOnClick(item) {
     let onChangeParam: Option[];
@@ -51,13 +53,26 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   return (
     <div className={styles.multidropdown}>
       <div tabIndex={0} role="button" onClick={() => toggle()}>
-        <div>
-          <p>{pluralizeOptions(value)}</p>
+        <div className={styles["multidropdown__value-window"]}>
+          <p className={styles["multidropdown__value-window__value"]}>
+            {pluralizeOptions(value)}
+          </p>
+          {/* TODO Give these buttons up and down arrows */}
+          <img
+            src={open ? arrowUp : arrowDown}
+            alt=""
+            className={styles["multidropdown__value-window__arrow"]}
+          />
         </div>
         {/* Can use this to show arrow/button that opens a dropdown */}
-        {/* <div>
-          <p>{open ? "Close" : "Open"}</p>
-        </div> */}
+        <div>
+          {/* <p>{open ? "Close" : "Open"}</p> */}
+          {/* <img
+            src={open ? arrowUp : arrowDown}
+            alt=""
+            className={styles.multidropdown__arrow}
+          /> */}
+        </div>
       </div>
       {open && !disabled && (
         <ul className={styles.multidropdown__menu}>
@@ -77,3 +92,5 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     </div>
   );
 };
+
+export default MultiDropdown;

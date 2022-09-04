@@ -21,9 +21,12 @@
             font-size: 10px;
             position: absolute;
             right: 0;
-            //bottom: 0;
             top: 70%;
         }
+    }
+
+    &__end-text {
+        text-align: center;
     }
 }
 

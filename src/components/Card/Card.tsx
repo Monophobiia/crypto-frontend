@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@styles/Card.module.scss";
+import styles from "./Card.module.scss";
 
 type CardProps = {
   /** Image URL */
@@ -14,7 +14,7 @@ type CardProps = {
   onClick?: React.MouseEventHandler;
 };
 
-export const Card: React.FC<CardProps> = ({
+const Card: React.FC<CardProps> = ({
   image,
   title,
   subtitle,
@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
 }: CardProps) => {
   return (
     <div className={styles.card}>
-      <img src={image} className={styles.card__image}></img>
+      <img src={image} className={styles.card__image} />
       <span className={styles.card__title}>
         {title}
         <p className={styles.card__subtitle}>{subtitle}</p>
@@ -33,3 +33,5 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 };
+
+export default React.memo(Card);
