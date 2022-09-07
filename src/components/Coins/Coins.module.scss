@@ -4,36 +4,4 @@
     width: 420px;
     height: 100%;
     font-family: 'Circular Std', sans-serif;
-
-    &__price {
-        width: auto;
-        height: auto;
-        font-size: 16px;
-        position: absolute;
-        right: 5%;
-
-        &__price-current {
-            position: relative;
-            right: 0;
-        }
-
-        &__price-change {
-            font-size: 10px;
-            position: absolute;
-            right: 0;
-            top: 70%;
-        }
-    }
-
-    &__end-text {
-        text-align: center;
-    }
-}
-
-.coins__price__price-change.price-change-gain {
-    color: $price-gain;
-}
-
-.coins__price__price-change.price-change-loss {
-    color: $price-loss;
 }
