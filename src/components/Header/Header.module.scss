@@ -60,4 +60,17 @@
         color: $header-selected-link;
         border-bottom: 2px solid $header-selected-link;
     }
+
+    &__search {
+        padding: 10px 10px 10px 0;
+        padding-top: 10px;
+        padding-right: 10px;
+        flex: 1;
+        float: right;
+
+        &__img {
+            width: 30px;
+            height: 30px;
+        }
+    }
 }

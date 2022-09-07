@@ -12,7 +12,7 @@ export type InputProps = Omit<
   onChange: (value: string) => void;
 };
 
-export const Input: React.FC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   value = "",
   className,
   onChange,
@@ -33,3 +33,5 @@ export const Input: React.FC<InputProps> = ({
     ></input>
   );
 };
+
+export default Input;

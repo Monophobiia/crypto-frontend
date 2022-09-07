@@ -16,9 +16,9 @@ const App = () => {
 
   return (
     <div className={`${styles.app}`}>
-      <BrowserRouter>
-        <RouteProvider />
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <RouteProvider />
+      {/* </BrowserRouter> */}
     </div>
   );
 };
