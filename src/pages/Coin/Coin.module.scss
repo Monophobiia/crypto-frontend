@@ -1,0 +1,61 @@
+@import "src/variables";
+
+.coin {
+    font-family: 'Circular Std', sans-serif;
+    max-width: 500px;
+    flex: 1;
+    height: auto;
+    margin: 0 auto;
+    font-size: 16px;
+
+    &__back {
+        margin-bottom: 5%;
+    }
+
+    &__small-image {
+        position: relative;
+        height: 24px;
+        width: 24px;
+        top: 4px;
+        margin-right: 5px;
+        margin-left: 10px;
+    }
+
+    &__name {
+        font-size: 16px;
+        height: auto;
+    }
+
+    &__symbol {
+        color: $coin-symbol;
+        font-size: 10px;
+        padding-left: 5px;
+        font-size: 10px;
+    }
+
+    &__price {
+        width: 100%;
+
+        &__curr-price {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        &__price-change-gain {
+            color: $price-gain;
+        }
+
+        &__price-change-loss {
+            color: $price-loss;
+        }
+    }
+
+    &__price__difference {
+        margin-right: 3px;
+    }
+
+    &__arrow-left {
+        height: 15px;
+        width: 15px;
+    }
+}

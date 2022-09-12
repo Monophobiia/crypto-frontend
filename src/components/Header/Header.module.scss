@@ -1,0 +1,63 @@
+@import "src/variables";
+
+.header {
+    height: auto;
+    width: auto;
+    font-size: 20px;
+    padding-bottom: 5px;
+
+    &__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &__filter-currency {
+            font-style: normal;
+            font-weight: 450;
+            font-size: 12px;
+            line-height: 15px;
+            width: 25%;
+        }
+    }
+
+    &__h1 {
+        font-family: 'Circular Std', sans-serif;
+        font-size: 18px;
+    }
+
+    &__link {
+        color: $header-link;
+        text-decoration: none;
+    }
+
+    &__links {
+        font-family: 'Circular Std', sans-serif;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    &__links-all {
+        margin-right: 3%;
+    }
+
+    &__links-gainer {
+        margin-right: 3%;
+    }
+
+    &__links-loser {
+        margin-right: 3%;
+    }
+
+    &__links-fav {
+        margin-right: 3%;
+    }
+
+    &__selected {
+        text-decoration: none;
+        font-weight: bold;
+        color: $header-selected-link;
+        border-bottom: 2px solid $header-selected-link;
+    }
+}
