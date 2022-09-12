@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({
   disabled,
   ...rest
 }: InputProps) => {
-  function handleChange(event) {
+  function handleChange(event: any) {
     onChange(event.target.value);
   }
 

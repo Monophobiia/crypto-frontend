@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Input from "@components/Input";
+import Input from "components/Input";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import styles from "./Search.module.scss";
 

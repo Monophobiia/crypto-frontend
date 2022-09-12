@@ -1,23 +1,22 @@
-import React, { useState } from "react";
-import Card from "@components/Card";
+import * as React from "react";
 import cn from "classnames";
+import Card from "components/Card";
+import Loader from "components/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import styles from "./CoinsList.module.scss";
 
 type CoinsListProps = {
-  list: [];
+  list: any[];
   hasMore: boolean;
-  page: number;
   searchString: string;
-  currency: string;
-  onNext: (value: number) => void;
+  currency: { key: string; value: string }[];
+  onNext: any; //(value: number) => void;
 };
 
 const CoinsList = ({
   list,
   hasMore,
-  page,
   searchString,
   currency,
   onNext,
@@ -32,6 +31,7 @@ const CoinsList = ({
           <b>Yay! You have seen it all.</b>
         </p>
       }
+      loader={<Loader />}
     >
       {list.map(
         (coin: {

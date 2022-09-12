@@ -1,7 +1,6 @@
 export type GetCoinsListParams = {
   currency: Array<{ key: string; value: string }>;
-  page: number;
-  tab: string;
+  page: any;
 };
 
 export type ListItem = {

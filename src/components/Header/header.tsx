@@ -1,7 +1,7 @@
 import React from "react";
-import searchImg from "@assets/search.png";
-import MultiDropdown from "@components/MultiDropdown";
-import Search from "@components/Search";
+import searchImg from "assets/search.png";
+import MultiDropdown from "components/MultiDropdown";
+import Search from "components/Search";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
@@ -10,11 +10,18 @@ type HeaderProps = {
   /* Same as in MultiDropdown */
   dropdownValue: Option[];
   dropdownOptions: Option[];
-  onChange: (value: Option[]) => void;
+  onChange: (value: any) => void;
   /* Except for current tab, which is used to style chosen tab link */
-  currentTab: string;
+  currentTab: string | undefined;
   searchInputValue: string;
   linkOnClick: () => void;
+};
+
+type Option = {
+  /** Option key */
+  key: string;
+  /** Option value shown to user */
+  value: string;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -67,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({
         </span>
         <span className={styles["header__links-gainer"]}>
           <Link
-            to="/gainerF"
+            to="/gainer"
             className={cn(
               styles.header__link,
               currentTab === "gainer" ? styles.header__selected : ""
@@ -78,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
         </span>
         <span className={styles["header__links-loser"]}>
           <Link
-            to="/loserF"
+            to="/loser"
             className={cn(
               styles.header__link,
               currentTab === "loser" ? styles.header__selected : ""
@@ -88,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({
           </Link>
         </span>
         <span className={cn(styles["header__links-fav"])}>
-          <Link to="/favouritesF" className={styles.header__link}>
+          <Link to="/favourites" className={styles.header__link}>
             Favourites
           </Link>
         </span>

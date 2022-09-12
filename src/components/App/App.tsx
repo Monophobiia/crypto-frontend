@@ -1,5 +1,5 @@
 import React from "react";
-import routes from "@config/routes";
+import routes from "config/routes";
 import {
   BrowserRouter,
   Routes,

@@ -1,5 +1,3 @@
-import ApiStore from "@stores/ApiStore";
-import rootStore from "@stores/RootStore";
 import {
   action,
   computed,
@@ -9,6 +7,8 @@ import {
   reaction,
   runInAction,
 } from "mobx";
+import ApiStore from "stores/ApiStore";
+import rootStore from "stores/RootStore";
 import { GetCoinsListParams, ICoinsListStore, ListItem } from "./types";
 
 type PrivateFields =
@@ -33,13 +33,14 @@ export default class CoinsListStore implements ICoinsListStore {
     { key: "rub", value: "Market-RUB" },
     { key: "eur", value: "Market-EUR" },
   ];
+  private _tab: string | undefined = "";
 
   /* Getters */
   get list(): ListItem[] {
     return this._list;
   }
 
-  get searchString(): string {
+  get searchString(): any {
     return this._searchString;
   }
 
@@ -64,14 +65,17 @@ export default class CoinsListStore implements ICoinsListStore {
       _currencies: observable,
       list: computed,
       GetCoinsList: action,
+      setTab: action,
+      setCurrency: action,
     });
   }
 
-  dataNormalizer = (data: {}) => {
+  dataNormalizer = (data: []) => {
     return data.map(
       (raw: {
         id: string;
         image: string;
+        large: string;
         name: string;
         symbol: string;
         current_price: number;
@@ -89,51 +93,53 @@ export default class CoinsListStore implements ICoinsListStore {
     );
   };
 
-  async GetCoinsList({
-    currency,
-    page,
-    tab,
-  }: GetCoinsListParams): Promise<void> {
-    const response = !this.searchString
-      ? await this._apiStore.Request<ListItem>({
-          currency: this._currency[0].key,
-          page: page,
-        })
-      : await this._apiStore.Search<ListItem>({
-          currency: this._currency[0].key,
-          searchString: this._searchString,
-        });
+  async GetCoinsList({ currency, page }: GetCoinsListParams): Promise<void> {
+    //console.log("called getcoinslist", this._searchString, this._tab);
+    const tab = this._tab;
+    console.log(this._searchString && this._tab === "searchInput");
+    const response =
+      !this.searchString && tab !== "inputSearch"
+        ? await this._apiStore.Request({
+            currency: this._currency[0].key,
+            page: page,
+          })
+        : await this._apiStore.Search({
+            searchString: this._searchString,
+          });
+
+    if (this._searchString && this._tab === "searchInput")
+      console.log(this.dataNormalizer(response));
+    else console.log("wrong");
 
     if (response.length === 0) this._hasMore = false;
+
     runInAction(() => {
-      this._list = this._searchString
-        ? this.dataNormalizer(response)
-        : this._list
-            .concat(this.dataNormalizer(response))
-            .reverse()
-            /* Filtering duplicate ids, and removing all except new ones */
-            .filter(
-              /* Simplier solution:
-             for each given array item check if there's a duplicate on id property,
-             return it's index and remove it with filter  */
-              (item, index, array) =>
-                array.findIndex((indexItem) => indexItem.id === item.id) ===
-                index
-            )
-            /* Reversing again to save initial order */
-            .reverse()
-            .filter((item) =>
-              tab === "gainer"
-                ? item.priceChange > 0
-                : tab === "loser"
-                ? item.priceChange < 0
-                : item
-            );
+      this._list =
+        this._searchString && this._tab === "searchInput"
+          ? this.dataNormalizer(response)
+          : this._list
+              .concat(this.dataNormalizer(response))
+              .reverse()
+              /* Filtering duplicate ids, and removing all except new ones */
+              .filter(
+                (item, index, array) =>
+                  array.findIndex((indexItem) => indexItem.id === item.id) ===
+                  index
+              )
+              /* Reversing again to save initial order */
+              .reverse()
+              .filter((item) =>
+                tab === "gainer"
+                  ? item.priceChange > 0
+                  : tab === "loser"
+                  ? item.priceChange < 0
+                  : item
+              );
     });
   }
 
   /* Setters */
-  setCurrency = (value) => {
+  setCurrency = (value: { key: string; value: string }[]) => {
     runInAction(() => {
       this._currency = value;
     });
@@ -144,6 +150,11 @@ export default class CoinsListStore implements ICoinsListStore {
     runInAction(() => {
       this._list = [];
     });
+  };
+
+  setTab = (tab: string | undefined) => {
+    this._hasMore = true;
+    this._tab = tab;
   };
 
   private readonly _qpReaction: IReactionDisposer = reaction(

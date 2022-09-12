@@ -1,5 +1,6 @@
-import Coins from "@components/Coins";
-import Coin from "@pages/Coin";
+import * as React from "react";
+import Coins from "components/Coins";
+import Coin from "pages/Coin";
 
 const routes = [
   {

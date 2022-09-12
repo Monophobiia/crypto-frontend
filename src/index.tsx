@@ -1,5 +1,5 @@
-import React from "react";
-import App from "@components/App";
+import * as React from "react";
+import App from "components/App";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
@@ -13,3 +13,7 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+if (module.hot) {
+  module.hot.accept();
+}

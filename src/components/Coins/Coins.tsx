@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import CoinsList from "@components/CoinsList";
-import Header from "@components/Header";
-import { useQueryParamsStoreInit } from "@stores/RootStore/hooks/useQueryParamsStore";
-import rootStore from "@stores/RootStore/instance";
+import CoinsList from "components/CoinsList";
+import Header from "components/Header";
 import { observer, useLocalStore } from "mobx-react-lite";
 import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useQueryParamsStoreInit } from "stores/RootStore/hooks/useQueryParamsStore";
+import rootStore from "stores/RootStore/instance";
 import CoinsListStore from "../../stores/CoinsListStore";
 import styles from "./Coins.module.scss";
 
@@ -23,16 +23,20 @@ const Coins: React.FC = () => {
 
   const [pageParams, setPageParams] = useSearchParams();
 
+  const searchParamsTostring = (search: URLSearchParams) => {
+    return search.toString();
+  };
+
   useEffect(() => {
+    coinsListStore.setTab(tab);
     const page = rootStore.query.getParam("page");
-    tab !== "searchInput"
+    tab !== "searchInput" // Tab changing breaks because of this
       ? setPageParams(page ? `page=${page}` : "page=1")
       : setSearchParams(`search=${rootStore.query.getParam("search")}`);
 
     coinsListStore.GetCoinsList({
       currency: [{ key: "usd", value: "Market-USD" }],
-      page: 1,
-      tab: tab,
+      page: page,
     });
   }, [coinsListStore, tab]);
 
@@ -45,13 +49,12 @@ const Coins: React.FC = () => {
           tab === "searchInput" ? setSearchParams : coinsListStore.setCurrency
         }
         currentTab={tab}
-        searchInputValue={searchParams}
+        searchInputValue={searchParamsTostring(searchParams)}
         linkOnClick={coinsListStore.setClearList}
       />
       <CoinsList
         list={coinsListStore.list}
         hasMore={coinsListStore.hasMore}
-        page={coinsListStore.page}
         searchString={coinsListStore.searchString}
         currency={coinsListStore.currency}
         onNext={() => {
