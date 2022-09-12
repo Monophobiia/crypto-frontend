@@ -5,17 +5,17 @@ axios.defaults.baseURL = "https://api.coingecko.com/api/v3/coins/";
 
 const useFetch = (url: string) => {
   const [isLoading, setLoading] = useState(false),
-    [isError, setError] = useState(null),
+    [isError, setError] = useState(false),
     [result, setResult] = useState(null);
 
-  const fetch = async (url) => {
+  const fetch = async (url: string) => {
     setLoading(true);
     try {
       const response = await axios.get(url);
       setResult(response.data);
-      setError(null);
+      setError(false);
     } catch (err) {
-      setError(err);
+      setError(true);
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import routes from "@config/routes";
+import routes from "config/routes";
 import {
   BrowserRouter,
   Routes,
@@ -16,9 +16,9 @@ const App = () => {
 
   return (
     <div className={`${styles.app}`}>
-      <BrowserRouter>
-        <RouteProvider />
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <RouteProvider />
+      {/* </BrowserRouter> */}
     </div>
   );
 };

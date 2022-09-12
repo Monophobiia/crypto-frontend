@@ -1,10 +1,11 @@
-import Coins from "@components/Coins";
-import Coin from "@pages/Coin";
+import * as React from "react";
+import Coins from "components/Coins";
+import Coin from "pages/Coin";
 
 const routes = [
   {
     path: "/",
-    element: <Coins className="app__coin-list" />,
+    element: <Coins />,
     children: [{ path: ":tab", element: <Coins /> }],
   },
   {

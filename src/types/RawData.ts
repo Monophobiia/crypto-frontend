@@ -1,4 +1,4 @@
-type RawData = {
+export type RawData = {
   id: string;
   image: string;
   name: string;

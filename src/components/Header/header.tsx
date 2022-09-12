@@ -1,5 +1,7 @@
 import React from "react";
-import MultiDropdown from "@components/MultiDropdown";
+import searchImg from "assets/search.png";
+import MultiDropdown from "components/MultiDropdown";
+import Search from "components/Search";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
@@ -8,9 +10,18 @@ type HeaderProps = {
   /* Same as in MultiDropdown */
   dropdownValue: Option[];
   dropdownOptions: Option[];
-  onChange: (value: Option[]) => void;
+  onChange: (value: any) => void;
   /* Except for current tab, which is used to style chosen tab link */
-  currentTab: string;
+  currentTab: string | undefined;
+  searchInputValue: string;
+  linkOnClick: () => void;
+};
+
+type Option = {
+  /** Option key */
+  key: string;
+  /** Option value shown to user */
+  value: string;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -18,62 +29,79 @@ const Header: React.FC<HeaderProps> = ({
   dropdownValue,
   onChange,
   currentTab,
-}) => (
-  <header className={styles.header}>
-    <div className={styles.header__content}>
-      <h1 className={styles.header__h1}>Coins</h1>
-      <span className={styles["header__content__filter-currency"]}>
-        <MultiDropdown
-          value={dropdownValue}
-          options={dropdownOptions}
-          onChange={onChange}
-          pluralizeOptions={(elements: Option[]) =>
-            elements.map((el: Option) => el.key).join()
-          }
-        />
-      </span>
-    </div>
-    <div className={styles.header__links}>
-      <span className={styles["header__links-all"]}>
-        <Link
-          to="/"
-          className={cn(
-            styles.header__link,
-            currentTab || styles.header__selected
-          )}
-        >
-          All
+  searchInputValue,
+  linkOnClick,
+}) => {
+  if (currentTab === "searchInput")
+    return (
+      <Search
+        value={searchInputValue}
+        onChange={onChange}
+        linkOnClick={linkOnClick}
+      />
+    );
+  return (
+    <header className={styles.header}>
+      <div className={styles.header__search}>
+        <Link to="/searchInput">
+          <img src={searchImg} alt="" className={styles.header__search__img} />
         </Link>
-      </span>
-      <span className={styles["header__links-gainer"]}>
-        <Link
-          to="/gainer"
-          className={cn(
-            styles.header__link,
-            currentTab === "gainer" ? styles.header__selected : ""
-          )}
-        >
-          Gainer
-        </Link>
-      </span>
-      <span className={styles["header__links-loser"]}>
-        <Link
-          to="/loser"
-          className={cn(
-            styles.header__link,
-            currentTab === "loser" ? styles.header__selected : ""
-          )}
-        >
-          Loser
-        </Link>
-      </span>
-      <span className={cn(styles["header__links-fav"])}>
-        <Link to="/favourites" className={styles.header__link}>
-          Favourites
-        </Link>
-      </span>
-    </div>
-  </header>
-);
+      </div>
+      <div className={styles.header__content}>
+        <h1 className={styles.header__h1}>Coins</h1>
+        <span className={styles["header__content__filter-currency"]}>
+          <MultiDropdown
+            value={dropdownValue}
+            options={dropdownOptions}
+            onChange={onChange}
+            pluralizeOptions={(elements: Option[]) =>
+              elements.map((el: Option) => el.key).join()
+            }
+          />
+        </span>
+      </div>
+      <div className={styles.header__links}>
+        <span className={styles["header__links-all"]}>
+          <Link
+            to="/"
+            className={cn(
+              styles.header__link,
+              currentTab || styles.header__selected
+            )}
+          >
+            All
+          </Link>
+        </span>
+        <span className={styles["header__links-gainer"]}>
+          <Link
+            to="/gainer"
+            className={cn(
+              styles.header__link,
+              currentTab === "gainer" ? styles.header__selected : ""
+            )}
+          >
+            Gainer
+          </Link>
+        </span>
+        <span className={styles["header__links-loser"]}>
+          <Link
+            to="/loser"
+            className={cn(
+              styles.header__link,
+              currentTab === "loser" ? styles.header__selected : ""
+            )}
+          >
+            Loser
+          </Link>
+        </span>
+        <span className={cn(styles["header__links-fav"])}>
+          <Link to="/favourites" className={styles.header__link}>
+            Favourites
+          </Link>
+        </span>
+      </div>
+    </header>
+  );
+};
 
 export default Header;

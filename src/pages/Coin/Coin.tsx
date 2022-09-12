@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import arrowLeft from "@assets/arrow_left.png";
-import Card from "@components/Card";
-import Loader from "@components/Loader";
-import useFetch from "@hooks/useFetch";
+import arrowLeft from "assets/arrow_left.png";
+import Card from "components/Card";
+import Loader from "components/Loader";
+import useFetch from "hooks/useFetch";
 import cn from "classnames";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Coin.module.scss";
@@ -12,7 +12,7 @@ import styles from "./Coin.module.scss";
 */
 const Coin: React.FC = () => {
   const { id } = useParams();
-  const { result, isError, isLoading } = useFetch(`${id}?vs_currency=usd`);
+  const { result, isError, isLoading }: any = useFetch(`${id}?vs_currency=usd`);
 
   if (isLoading)
     return (
@@ -77,6 +77,8 @@ const Coin: React.FC = () => {
         />
       </div>
     );
+
+  return <Loader />
 };
 
 export default Coin;

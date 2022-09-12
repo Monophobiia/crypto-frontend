@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
-import arrowDown from "@assets/arrow_down.png";
-import arrowUp from "@assets/arrow_up.png";
+import arrowDown from "assets/arrow_down.png";
+import arrowUp from "assets/arrow_up.png";
 import styles from "./MultiDropdown.module.scss";
 
 /** Dropdown option */
@@ -38,7 +38,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
       if (!disabled) setOpen(!open);
     }, [open]);
 
-  function handleOnClick(item) {
+  function handleOnClick(item: {key: string, value: string}) {
     let onChangeParam: Option[];
 
     if (value.includes(item))
@@ -57,21 +57,13 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           <p className={styles["multidropdown__value-window__value"]}>
             {pluralizeOptions(value)}
           </p>
-          {/* TODO Give these buttons up and down arrows */}
           <img
             src={open ? arrowUp : arrowDown}
             alt=""
             className={styles["multidropdown__value-window__arrow"]}
           />
         </div>
-        {/* Can use this to show arrow/button that opens a dropdown */}
         <div>
-          {/* <p>{open ? "Close" : "Open"}</p> */}
-          {/* <img
-            src={open ? arrowUp : arrowDown}
-            alt=""
-            className={styles.multidropdown__arrow}
-          /> */}
         </div>
       </div>
       {open && !disabled && (
