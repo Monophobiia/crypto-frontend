@@ -1,0 +1,25 @@
+@import "src/variables";
+
+.search {
+    width: 100%;
+    font-family: 'Circular Std', sans-serif;
+
+    &__input {
+        margin: 10px 0 10px 0px;
+        background: $search-input-background;
+        border: 1px solid $search-input-border;
+        border-radius: 4px;
+        width: 269px;
+        height: 40px;
+    }
+
+    &__cancel {
+        padding-left: 30px;
+        font-size: 12px;
+
+        &__link {
+            text-decoration: none;
+            color: $search-cancel-button;
+        }
+    }
+}
